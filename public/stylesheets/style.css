@@ -1,0 +1,22 @@
+@import "_reset.css";
+@import "_templates.css";
+@import "_authPages.css";
+@import "_index.css";
+@import "_listUsers.css";
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  text-align: center;
+  margin: 0 auto auto;
+  max-width: 800px;
+}
+
+button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}

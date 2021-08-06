@@ -1,0 +1,28 @@
+.users-group {
+    width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px;
+  }
+  
+  .users-list h1 {
+    padding-top: 10px;
+  }
+  
+  .users-list h3 {
+    padding-top: 30px;
+    font-weight: 600;
+  }
+  
+  .user-card {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    height: 100px;
+    max-width: 200px;
+  }

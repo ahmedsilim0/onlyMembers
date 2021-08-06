@@ -1,0 +1,79 @@
+  
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./includes/_head"); %>
+  <body>
+    <%- include("./includes/_header"); %>
+    <%- include("./includes/_nav"); %>
+    <main>
+      <% if (currentUser) {%>
+        <h2>Welcome <%= currentUser.username %></h2>
+        <% if (currentUser.membership === 'guest') { %>
+          <h4>
+            You must <a href="/join">change your membership</a> status to Member or Admin to post new messages.
+          </h4>
+        <% } else { %>
+          <% if (locals.error) { %> 
+            <p class="error">
+              <%= error %> 
+            </p>
+          <% } %>
+          <div class="compose-message-container">
+            <h3>Write a new message!</h3>
+            <form action="/message" method="POST">
+              <input type="text" placeholder="Message title" name="title">
+              <textarea type="text" placeholder="Message content" name="text"></textarea>
+              <button type="subimt">Send Message</button>
+            </form>
+          </div>
+        <% } %>
+      <% } else { %>
+        <h2>Please <a href="/login">Log in</a> to post messages</h2>
+      <%}%>
+
+      <div class="list-messages-container">
+        <% messages.map(message => { %>
+          <div class="message-card">
+              <div class="card-left">
+                <img src="./images/default-profile.jpg" alt="User profile">
+                <p class="membership"><%= message.user.membership %></p>
+              </div>
+              <div class="card-right">
+                <p class="msg-title"><%= message.title %></p>
+                <% if (!currentUser || currentUser.membership === "guest") { %> 
+                  <div class="card-right-user-info">
+                    <p class="msg-name">Hidden</p>
+                    <p class="msg-username">@Hidden</p>
+                  </div>
+                  <p class="msg-text">Only members can see message content</p>
+                  <p class="msg-date"><%= new Date(message.timestamp).toString().split('G')[0] %></p>
+                <% } else if ( currentUser.membership === "member") { %>
+                  <div class="card-right-user-info">
+                    <p class="msg-name"><%= message.user.name %></p>
+                    <p class="msg-username">@<%= message.user.username %></p>
+                  </div>
+                  <p class="msg-text"><%= message.text %></p>
+                  <p class="msg-date"><%= new Date(message.timestamp).toString().split('G')[0] %></p>
+                <% } else if (currentUser.membership === "admin") { %>
+                  <div class="card-right-user-info">
+                    <p class="msg-name"><%= message.user.name %></p>
+                    <p class="msg-username">@<%= message.user.username %></p>
+                  </div>
+                  <p class="msg-text"><%= message.text %></p>
+                  <p class="msg-date"><%= new Date(message.timestamp).toString().split('G')[0] %></p>
+                  <form action="/message/delete" method="POST">
+                    <input type="hidden" name="messageid" required="true" value=<%= message._id %>>
+                    <button type="submit">Delete</button>
+                  </form>
+                <% } %>
+              </div>
+          </div>
+        <% }) %>
+      </div>
+
+
+    </main>
+
+    <%- include("./includes/_footer"); %>
+  </body>
+</html>

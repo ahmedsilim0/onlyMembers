@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./includes/_head"); %>
+  <body>
+    <%- include("./includes/_header"); %>
+    <%- include("./includes/_nav"); %>
+
+    <div class="form-container">      
+      <div class="info-container">
+        <% if (currentUser) { %>       
+          <h3>Hi <%= currentUser.name %>, your current membership status is: 
+            <strong>
+              <%= currentUser.membership %>
+          </strong>
+          <% if (locals.error) { %>
+            <p><%= error %></p>
+          <% } %>
+        <form method="POST">
+          <select name="membership" id="membership">
+            <option value="admin">Admin</option>
+            <option value="member">Member</option>
+            <option value="guest" selected>Guest</option>
+          </select>
+          <input 
+            type="password"
+            name="password"
+            placeholder="Password"
+          >
+          <button type="submit">Submit</button>
+        </form>
+        <h3>To become an admin, you must enter the admin password (linked in the <a href="https://github.com/FlanaganSe/private-messenger-app">github repo)</a></h3>
+      </h3>
+        <% } else { %>
+          <h3>You must be <a href="/login">Logged in</a> to change your membership</h3>
+        <% } %>
+      </div>
+    </div>
+
+
+    <%- include("./includes/_footer"); %>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+<div class="nav-bar-container">
+    <nav>
+      <a href="/">Home</a>
+      <a href="/users">Users</a>
+      <% if (currentUser) {%>
+        <a href="/join">Join Club</a>
+      <% } %>
+    </nav>
+    <div class="nav-right">
+      <% if (currentUser) {%>
+        <a href="/logout">LOG OUT</a>
+      <% } else { %>
+        <a href="/signup">Sign Up</a>
+        <a href="/login">Log In</a>
+      <% } %>
+    </div>
+  </div>

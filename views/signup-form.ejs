@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./includes/_head"); %>
+  <body>
+    <%- include("./includes/_header"); %>
+    <%- include("./includes/_nav"); %>
+
+    <div class="form-container">
+      <% if (locals.errors) { %> 
+        <% errors.map(err => { %> 
+        <p>
+          <%= err.msg %>
+        </p>
+        <% }) %>
+      <% } %>
+
+      <h1>Sign Up!</h1>
+  
+      <form method="POST">
+        <input 
+          type="text"
+          name="name"
+          placeholder="Enter full name"
+          required="true"
+        >
+        <input 
+          type="text"
+          name="username"
+          placeholder="Enter username"
+          required="true"
+        >
+        <input 
+          type="password"
+          name="password"
+          placeholder="Enter password"
+          required="true"
+        >
+        <input 
+          type="password"
+          name="confirmPassword"
+          placeholder="Confirm password"
+          required="true"
+        >
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <%- include("./includes/_footer"); %>
+  </body>
+</html>
